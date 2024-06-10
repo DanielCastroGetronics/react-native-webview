@@ -255,9 +255,9 @@ public class RNCWebViewModuleImpl implements ActivityEventListener {
         }
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents.toArray(new Parcelable[]{}));
 
-        if (chooserIntent.resolveActivity(activity.getPackageManager()) != null) {
-            activity.startActivityForResult(chooserIntent, PICKER_LEGACY);
-        } else {
+        try{
+        activity.startActivityForResult(chooserIntent, PICKER_LEGACY);
+        } catch (ActivityNotFoundException e) {
             Log.w("RNCWebViewModule", "there is no Activity to handle this Intent");
         }
     }
@@ -294,11 +294,11 @@ public class RNCWebViewModuleImpl implements ActivityEventListener {
         }
 
         if (chooserIntent != null) {
-            if (chooserIntent.resolveActivity(activity.getPackageManager()) != null) {
-                activity.startActivityForResult(chooserIntent, PICKER);
-            } else {
-                Log.w("RNCWebViewModule", "there is no Activity to handle this Intent");
-            }
+            try{
+                activity.startActivityForResult(chooserIntent, PICKER_LEGACY);
+                } catch (ActivityNotFoundException e) {
+                    Log.w("RNCWebViewModule", "there is no Activity to handle this Intent");
+                }
         } else {
             Log.w("RNCWebViewModule", "there is no Camera permission");
         }
