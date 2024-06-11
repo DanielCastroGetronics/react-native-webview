@@ -296,7 +296,7 @@ public class RNCWebViewModuleImpl implements ActivityEventListener {
 
         if (chooserIntent != null) {
             try{
-                activity.startActivityForResult(chooserIntent, PICKER_LEGACY);
+                activity.startActivityForResult(chooserIntent, PICKER);
                 } catch (ActivityNotFoundException e) {
                     Log.w("RNCWebViewModule", "there is no Activity to handle this Intent");
                 }
